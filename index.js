@@ -72,9 +72,15 @@ console.log(getFilmingLocationsNumberPerYear())
 //    }
 // 2. Log the result
 function getFilmingLocationsNumberPerDistrict () {
-	return {}
+	const filmingLocationsPerDistrict = {}
+	for(let pas =0; pas<filmingLocations.length; pas++) {
+		if(filmingLocationsPerDistrict[filmingLocations[pas].fields.ardt_lieu] == undefined){filmingLocationsPerDistrict[filmingLocations[pas].fields.ardt_lieu]=1}
+		else {filmingLocationsPerDistrict[filmingLocations[pas].fields.ardt_lieu]++}
+	}
+	return filmingLocationsPerDistrict
 }
-console.log()
+console.log("Here is the number of film locations in Paris by district !")
+console.log(getFilmingLocationsNumberPerDistrict())
 
 // 📝 TODO: Number of locations per film, sorted in descending order
 // 1. Implement the function, result expected as an array of object like:
