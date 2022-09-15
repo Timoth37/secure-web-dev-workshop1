@@ -33,9 +33,15 @@ console.log(sortFilmingLocationsByStartDate()[0],sortFilmingLocationsByStartDate
 // 1. Make the function return the number of filming locations in 2020 only
 // 2. Log the result
 function getFilmingLocationsNumber2020 () {
-	return ''
+	const result = []
+	for(let pas =0; pas<filmingLocations.length; pas++)
+	{
+		if(new Date(filmingLocations[pas].fields.date_debut).getFullYear() == new Date('2020-01-01').getFullYear())
+			result.push(filmingLocations[pas])
+	}
+	return result
 }
-console.log()
+console.log(`There is ${getFilmingLocationsNumber2020().length} filming locations in Paris in 2020`)
 
 // 📝 TODO: Number of filming locations per year
 // 1. Implement the function, the expected result is an object with years as
