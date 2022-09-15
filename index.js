@@ -87,6 +87,12 @@ console.log(getFilmingLocationsNumberPerDistrict())
 //    const result = [{film: 'LRDM - Patriot season 2', locations: 12}, {...}]
 // 2. Log the first and last item of the array
 function getFilmLocationsByFilm () {
+
+	const filmingLocationsPerFilm = []
+	for(let pas =0; pas<filmingLocations.length; pas++) {
+		if(filmingLocationsPerFilm[filmingLocations[pas].fields.nom_tournage] == undefined){filmingLocationsPerFilm[filmingLocations[pas].fields.nom_tournage]=1}
+		else {filmingLocationsPerFilm[filmingLocations[pas].fields.nom_tournage]++}
+	}
 	return []
 }
 console.log()
@@ -95,8 +101,14 @@ console.log()
 // 1. Implement the function
 // 2. Log the result
 function getNumberOfFilms() {
-	return ''
+	const set = new Set()
+	for(let pas =0; pas<filmingLocations.length; pas++)
+	{
+		set.add(filmingLocations[pas].fields.nom_tournage)
+	}
+	return set
 }
+console.log(`There is ${getNumberOfFilms().size} different films`)
 
 // 📝 TODO: All the filming locations of `LRDM - Patriot season 2`
 // 1. Return an array with all filming locations of LRDM - Patriot season 2
