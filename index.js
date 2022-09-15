@@ -52,9 +52,16 @@ console.log(`There is ${getFilmingLocationsNumber2020().length} filming location
 //    }
 // 2. Log the result
 function getFilmingLocationsNumberPerYear () {
-	return {}
+	const filmingLocationsPerYear = {'2021' : 0, '2020' : 0, '2019' : 0, '2018' :0, '2017': 0, '2016': 0}
+	for(let pas =0; pas<filmingLocations.length; pas++)
+	{
+		const annee = new Date(filmingLocations[pas].fields.date_debut).getFullYear().toString()
+		filmingLocationsPerYear[annee]++
+	}
+	return filmingLocationsPerYear
 }
-console.log()
+console.log("Here is the number of film locations in Paris by year !")
+console.log(getFilmingLocationsNumberPerYear())
 
 // 📝 TODO: Number of filming locations by district (arrondissement)
 // 1. Implement the function, the expected result is an object with
