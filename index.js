@@ -122,8 +122,13 @@ function getNumberOfFilms() {
 // 1. Return an array with all filming locations of LRDM - Patriot season 2
 // 2. Log the result
 function getArseneFilmingLocations () {
-	return []
+	let spot = []
+	for(let step =0; step<filmingLocations.length;step++){
+		if(filmingLocations[step].fields.nom_tournage == 'LRDM - Patriot season 2'){spot.push(filmingLocations[step].fields.adresse_lieu)}
+	}
+	return spot
 }
+console.log('Toutes les adresses des lieux de tournages de LRDM :', getArseneFilmingLocations())
 
 // 📝 TODO: Tous les arrondissement des lieux de tournage de nos films favoris
 //  (favoriteFilms)
