@@ -100,7 +100,7 @@ function getFilmLocationsByFilm () {
 			tab[index].locations++
 		}
 	}
-	return tab.sort(function(a,b){return a-b})
+	return tab.sort(function(a,b){return b.locations - a.locations})
 }
 console.log("Film avec le plus de lieux de tournages :",getFilmLocationsByFilm()[0],"\nFilm avec le moins de lieux de tournages :",getFilmLocationsByFilm()[getFilmLocationsByFilm().length-1])
 
