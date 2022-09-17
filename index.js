@@ -137,7 +137,23 @@ console.log('Toutes les adresses des lieux de tournages de LRDM :', getArseneFil
 //    const films = { 'LRDM - Patriot season 2': ['75013'] }
 // 2. Log the result
 function getFavoriteFilmsLocations (favoriteFilmsNames) {
-	return []
+	const districtbyFavFilm = {}
+	for(let pas =0; pas<filmingLocations.length; pas++) {
+		let filmName = filmingLocations[pas].fields.nom_tournage
+		if(favoriteFilmsNames.indexOf(filmName)>-1){
+			let district =filmingLocations[pas].fields.ardt_lieu
+			if(districtbyFavFilm[filmName] == undefined){
+				districtbyFavFilm[filmName]=[district]
+			}
+			else{
+				console.log(district)
+				if(districtbyFavFilm[filmName].indexOf(district)<0){
+					districtbyFavFilm[filmName].push(district)
+				}
+			}
+		}
+	}
+	return districtbyFavFilm
 }
 const favoriteFilms =
 	[
@@ -145,6 +161,9 @@ const favoriteFilms =
 		'Alice NEVERS',
 		'Emily in Paris',
 	]
+console.log(getFavoriteFilmsLocations(favoriteFilms))
+
+
 
 // 📝 TODO: All filming locations for each film
 //     e.g. :
