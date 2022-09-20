@@ -222,16 +222,29 @@ const duration = (ms) => `${(ms/(1000*60*60*24)).toFixed(0)} days, ${((ms/(1000*
 // 1. Implement the function
 // 2. Log the filming location, and its computed duration
 
+function longestFilmingLocations(){
+	let max =0
+	let maxfilmingLocations={}
+	for(let step =0; step<filmingLocations.length;step++)
+	{
+		const time = new Date(filmingLocations[step].fields.date_fin)-new Date(filmingLocations[step].fields.date_debut)
+		if(time>max){max =time; maxfilmingLocations = filmingLocations[step]}
+	}
+	return maxfilmingLocations
+}
+
+console.log("The longest filming locations is", longestFilmingLocations().fields.nom_tournage," with a duration of", duration(new Date(longestFilmingLocations().fields.date_fin)-new Date(longestFilmingLocations().fields.date_debut)))
 // 📝 TODO: Compute the average filming duration
 // 1. Implement the function
 // 2. Log the result
 
 
 function averageDuration(){
-	for(let step =0; step<filmingLocations.length;step++)
-	{
-
+	let sum =0
+	for(let step =0; step<filmingLocations.length;step++) {
+		sum += 	new Date(filmingLocations[step].fields.date_fin)-new Date(filmingLocations[step].fields.date_debut)
 	}
-
+	return duration(sum/filmingLocations.length)
 }
+console.log("La durée moyenne par lieu de tournage :",averageDuration())
 
