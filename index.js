@@ -233,7 +233,7 @@ function longestFilmingLocations(){
 	return maxfilmingLocations
 }
 
-console.log("The longest filming locations is", longestFilmingLocations().fields.nom_tournage," with a duration of", duration(new Date(longestFilmingLocations().fields.date_fin)-new Date(longestFilmingLocations().fields.date_debut)))
+console.log("The longest filming locations is", longestFilmingLocations().fields.adresse_lieu," with a duration of", duration(new Date(longestFilmingLocations().fields.date_fin)-new Date(longestFilmingLocations().fields.date_debut)))
 // 📝 TODO: Compute the average filming duration
 // 1. Implement the function
 // 2. Log the result
