@@ -91,12 +91,10 @@ function getFilmLocationsByFilm () {
 	for(let step=0;step<filmingLocations.length;step++){
 		let element = tab.find(film => film.film == filmingLocations[step].fields.nom_tournage)
 		let index = tab.indexOf(element)
-		if(element == undefined)
-		{
+		if(element == undefined){
 			tab.push({"film" : filmingLocations[step].fields.nom_tournage, "locations" :1})
 		}
-		else
-		{
+		else{
 			tab[index].locations++
 		}
 	}
@@ -116,7 +114,7 @@ function getNumberOfFilms() {
 	}
 	return set
 }
-//console.log(`There is ${getNumberOfFilms().size} different films`)
+console.log(`There is ${getNumberOfFilms().size} different films`)
 
 // 📝 TODO: All the filming locations of `LRDM - Patriot season 2`
 // 1. Return an array with all filming locations of LRDM - Patriot season 2
@@ -146,7 +144,6 @@ function getFavoriteFilmsLocations (favoriteFilmsNames) {
 				districtbyFavFilm[filmName]=[district]
 			}
 			else{
-				console.log(district)
 				if(districtbyFavFilm[filmName].indexOf(district)<0){
 					districtbyFavFilm[filmName].push(district)
 				}
@@ -163,8 +160,6 @@ const favoriteFilms =
 	]
 console.log(getFavoriteFilmsLocations(favoriteFilms))
 
-
-
 // 📝 TODO: All filming locations for each film
 //     e.g. :
 //     const films = {
@@ -172,24 +167,49 @@ console.log(getFavoriteFilmsLocations(favoriteFilms))
 //        'Une jeune fille qui va bien': [{...}]
 //     }
 function getFilmingLocationsPerFilm () {
-	return { }
+	const films = {}
+	for(let pas =0; pas<filmingLocations.length;pas++){
+		let filmName = filmingLocations[pas].fields.nom_tournage
+			if(films[filmName] == undefined){
+				films[filmName]=[filmingLocations[pas]]
+			}
+			else{
+				films[filmName].push(filmingLocations[pas])
+			}
+	}
+	return films
 }
 
+console.log("LOCATIONS PER FILMS\n", getFilmingLocationsPerFilm()[Object.keys(getFilmingLocationsPerFilm())[0]])
 // 📝 TODO: Count each type of film (Long métrage, Série TV, etc...)
 // 1. Implement the function
 // 2. Log the result
 function countFilmingTypes () {
-	return {}
+	const typeofFilms = {}
+	for(let pas =0; pas<filmingLocations.length; pas++) {
+		if(typeofFilms[filmingLocations[pas].fields.type_tournage] == undefined){typeofFilms[filmingLocations[pas].fields.type_tournage]= new Set(); typeofFilms[filmingLocations[pas].fields.type_tournage].add(filmingLocations[pas].fields.nom_tournage) }
+		else {typeofFilms[filmingLocations[pas].fields.type_tournage].add(filmingLocations[pas].fields.nom_tournage)}
+	}
+	for (const typeofFilm of Object.keys(typeofFilms)) {
+		typeofFilms[typeofFilm] = typeofFilms[typeofFilm].size
+	}
+	return typeofFilms
 }
-
+console.log(countFilmingTypes())
 // 📝 TODO: Sort each type of filming by count, from highest to lowest
 // 1. Implement the function. It should return a sorted array of objects like:
 //    [{type: 'Long métrage', count: 1234}, {...}]
 // 2. Log the result
-function sortedCountFilmingTypes () {
-	return []
-}
 
+function sortedCountFilmingTypes () {
+	const filmingType = countFilmingTypes()
+	let sortedFilmingType = Object.keys(filmingType).map(function(key) {
+		return {type : key, count : filmingType[key]};
+	});
+	sortedFilmingType = sortedFilmingType.sort(function(a,b){return b.count-a.count})
+	return sortedFilmingType
+}
+console.log(sortedCountFilmingTypes())
 /**
  * This arrow functions takes a duration in milliseconds and returns a
  * human-readable string of the duration
